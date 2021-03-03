@@ -13,27 +13,25 @@ function App() {
   const [logMessages, setLogMessages] = useState([]);
   const [error, setError] = useState("");
   console.log(connection);
-  connection.onopen = function(session, details) {
-    
-    session.call('com.filmdatabox.democontrol.journal')
-    .then(function showSum(res) {
-    console.log('sum is', res);
-    setLogMessages(res);
-    console.log(logMessages, "messages");
-    }, session.log);
-  }
+  
+   
 
   useEffect(()=>{
-    console.log(logMessages);
-  }, []);
+    connection.onopen = function(session, details) {
+      session.call('com.filmdatabox.democontrol.journal')
+        .then(function showSum(res) {
+          setLogMessages(res);
+      }, session.log);
+    }
+  },[]);
 
-
+logMessages.map((m) => console.log(m, "message"));
   
   
 
   return (
    <>
-     
+    {logMessages? logMessages.map((m) => <p>{m}</p>) : <div></div>}
    </>
   );
 }
