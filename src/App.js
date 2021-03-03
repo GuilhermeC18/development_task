@@ -17,7 +17,7 @@ function App() {
         .then(function showSum(res) {
           setLogMessages(res);
       }, session.log);
-      var onCounter = function(args) {
+      const onCounter = function(args) {
         console.log('counter is', args[0]);
      }
       session.subscribe("com.filmdatabox.democontrol.journal",onCounter);
@@ -26,7 +26,7 @@ function App() {
 
   return (
    <>
-    {logMessages? logMessages.map((m) => <p>{m}</p>) : <div></div>}
+    {logMessages? logMessages.map((m, key) => <p>{m}</p>) : <div></div>}
    </>
   );
 }
