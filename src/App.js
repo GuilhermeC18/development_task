@@ -11,7 +11,7 @@ connection.open();
 function App() {
   return (
    <>
-    <div>hi</div>
+    
    </>
   );
 }
