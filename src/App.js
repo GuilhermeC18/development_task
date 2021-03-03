@@ -14,8 +14,11 @@ function App() {
   const [error, setError] = useState("");
   console.log(connection);
   connection.onopen = function(session, details) {
-    console.log("running", session);
-    session.register('com.filmdatabox.democontrol.journal');
+    const add2 = function(args) {
+      return args[0] + args[1];
+    };
+    session.register('com.filmdatabox.democontrol.journal', add2);
+    console.log(session.register());
     session.call('com.filmdatabox.democontrol.journal').then(function showSum(res) {
     console.log('sum is', res);
     }, session.log);
