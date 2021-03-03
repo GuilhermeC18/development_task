@@ -1,3 +1,4 @@
+import { useEffect, useState} from 'react';
 const autobahn = require('autobahn');
 
 const connection = new autobahn.Connection({
@@ -8,10 +9,25 @@ const connection = new autobahn.Connection({
 connection.open();
 
 
+
 function App() {
+  const [logMessages, setLogMessages] = useState([]);
+  const [error, setError] = useState("");
+
+  useEffect(()=>{
+    fetch('com.filmdatabox.democontrol.journal')
+      .then(res => res.json())
+      .then((logMessages) =>{
+        console.log(logMessages)
+        setLogMessages(logMessages)
+      })
+      .catch((err) => setError(err));
+  }, []);
+  console.log(logMessages);
+
   return (
    <>
-    
+     
    </>
   );
 }
