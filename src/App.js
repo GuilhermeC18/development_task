@@ -14,17 +14,18 @@ function App() {
   const [error, setError] = useState("");
   console.log(connection);
   connection.onopen = function(session, details) {
-    const add2 = function(args) {
-      return args[0] + args[1];
-    };
-    session.register('com.filmdatabox.democontrol.journal', add2);
-    console.log(session.register());
-    session.call('com.filmdatabox.democontrol.journal').then(function showSum(res) {
+    
+    session.call('com.filmdatabox.democontrol.journal')
+    .then(function showSum(res) {
     console.log('sum is', res);
+    setLogMessages(res);
+    console.log(logMessages, "messages");
     }, session.log);
   }
 
-
+  useEffect(()=>{
+    console.log(logMessages);
+  }, []);
 
 
   
