@@ -21,6 +21,7 @@ function App() {
       
       const onCounter = function(args) {
         console.log('counter is', args[0]);
+        setLogMessages(logMessages => [...logMessages, args[0]]);
      }
       session.subscribe("com.filmdatabox.democontrol.journal", onCounter)
   
