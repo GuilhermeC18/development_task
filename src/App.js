@@ -18,21 +18,18 @@ function App() {
         .then(function showSum(res) {
           setLogMessages(res);
       }, session.log);
+      
       const onCounter = function(args) {
-        setLogMessages(logMessages ,args[0])
+        console.log('counter is', args[0]);
      }
-
       session.subscribe("com.filmdatabox.democontrol.journal", onCounter)
-      .then(function addLog(res){
-        console.log(res, "res");
-        setLogMessages( logMessages, res)
-      })
+  
     }}, [setLogMessages]);
  
   console.log(logMessages);
   return (
    <>
-    {logMessages !== [] ? logMessages.map((m, key) => <p>{m}</p>) : <div></div>}
+    {logMessages !== [] ? logMessages.slice(0).reverse().map((m, key) => <p>{m}</p>) : <div></div>}
    </>
   );
 }
