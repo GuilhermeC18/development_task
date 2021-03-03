@@ -7,32 +7,23 @@ const connection = new autobahn.Connection({
 });
 
 
-connection.onopen = function(session, details) {
-  const add2 = function(args) {
-     return args[0] + args[1];
-  }
-  session.register('com.filmdatabox.democontrol.journal', add2);
-  session.call('com.filmdatabox.democontrol.journal', [2, 3]).then(function showSum(res) {
-  console.log('sum is', res);
-  }, session.log);
-}
+
 
 function App() {
   const [logMessages, setLogMessages] = useState([]);
   const [error, setError] = useState("");
-  console.log(connection, "connection");
-  useEffect(()=>{
-    fetch('com.filmdatabox.democontrol.journal')
-      
-      .then(res => console.log(res, "res"))
-      .then((logMessages) =>{
-        console.log(logMessages)
-        setLogMessages(logMessages)
-      })
-      .catch((err) => setError(err));
-  }, []);
+  
 
-  console.log(logMessages, "messages");
+  useEffect(() => {
+  connection.onopen = function(session, details) {
+    session.register('com.filmdatabox.democontrol.journal');
+    session.call('com.filmdatabox.democontrol.journal').then(function showSum(res) {
+    console.log('sum is', res);
+    }, session.log);
+  }
+}, []);
+  
+  
 
   return (
    <>
