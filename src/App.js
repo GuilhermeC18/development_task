@@ -18,12 +18,15 @@ function App() {
           setLogMessages(res);
       }, session.log);
       const onCounter = function(args) {
-        session.subscribe("com.filmdatabox.democontrol.journal", onCounter)
+        console.log(args[0])
+     }
+
+      session.subscribe("com.filmdatabox.democontrol.journal", onCounter)
       .then(function addLog(res){
         setLogMessages( logMessages, res)
       })
     }
-  }
+ 
   
   return (
    <>
