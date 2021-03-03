@@ -6,9 +6,17 @@ const connection = new autobahn.Connection({
   realm: "democontrol"
 });
 
-connection.open();
+connection.onopen(session, details) {
+  const add2 = function(args) {
+     return args[0] + args[1];
+  }
 
+  session.register('com.filmdatabox.democontrol.journal', add2);
+}
 
+session.call('com.filmdatabox.democontrol.journal', [2, 3]).then(function showSum(res) {
+  console.log('sum is', res);
+}, session.log);
 
 function App() {
   const [logMessages, setLogMessages] = useState([]);
@@ -23,6 +31,7 @@ function App() {
       })
       .catch((err) => setError(err));
   }, []);
+
   console.log(logMessages);
 
   return (
