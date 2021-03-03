@@ -23,7 +23,7 @@ function App() {
         console.log('counter is', args[0]);
         setLogMessages(logMessages => [...logMessages, args[0]]);
      }
-    
+      session.subscribe("com.filmdatabox.democontrol.journal", onCounter)
   
     }}, [setLogMessages]);
  
