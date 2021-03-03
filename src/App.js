@@ -11,8 +11,7 @@ connection.open();
 
 function App() {
   const [logMessages, setLogMessages] = useState([]);
-  const [error, setError] = useState("");
-  console.log(connection);
+  
   
    
 
