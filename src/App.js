@@ -8,25 +8,21 @@ const connection = new autobahn.Connection({
 
 connection.open();
 
-
 function App() {
   const [logMessages, setLogMessages] = useState([]);
   
-  
-   
-
   useEffect(()=>{
     connection.onopen = function(session, details) {
       session.call('com.filmdatabox.democontrol.journal')
         .then(function showSum(res) {
           setLogMessages(res);
       }, session.log);
+      var onCounter = function(args) {
+        console.log('counter is', args[0]);
+     }
+      session.subscribe("com.filmdatabox.democontrol.journal",onCounter);
     }
   },[]);
-
-logMessages.map((m) => console.log(m, "message"));
-  
-  
 
   return (
    <>
