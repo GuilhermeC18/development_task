@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+const autobahn = require('autobahn');
+
+const connection = new autobahn.Connection({
+  url: "ws://testassignment.filmdatabox.com:8233/ws",
+  realm: "democontrol"
+});
+
+connection.open();
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+    <div>hi</div>
+   </>
   );
 }
 
